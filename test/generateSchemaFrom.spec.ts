@@ -48,6 +48,12 @@ describe('generateSchemaFrom', () => {
     c: Joi.boolean().required()
 }).required()`)
 
+        });
+
+        it('should generate Joi.array with correct items', () => {
+            const input = ['id1', 'id2'];
+
+            expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string().required()).required()`);
         })
     });
 

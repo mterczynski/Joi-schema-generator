@@ -6,7 +6,12 @@ export function generateSchemaFrom(data: string | [] | object | number | boolean
     } else if(typeof data === 'boolean') {
         return `Joi.boolean().required()`
     } else if(Array.isArray(data)) {
-        return `Joi.array().required()`
+        if(data.length === 0) {
+            return `Joi.array().required()`
+        }
+
+        const firstValue = data[0];
+        return `Joi.array().items(Joi.${getJoiTypeForValue(firstValue)}().required()).required()`;
     } else if(typeof data === 'object') {
         if(Object.keys(data).length === 0) {
             return `Joi.object({}).required()`;
