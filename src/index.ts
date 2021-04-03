@@ -13,15 +13,11 @@ export function generateSchemaFrom(data: string | [] | object | number | boolean
         }
 
         const firstValue = data[0];
-        return `Joi.array().items(Joi.${getJoiTypeForValue(firstValue)}().required()).required()`;
+        return `Joi.array().items(Joi.${getJoiTypeForValue(firstValue)}()).required()`;
     } else if(typeof data === 'object') {
         if(Object.keys(data).length === 0) {
             return `Joi.object({}).required()`;
         }
-
-        // const schemasOfEntries = Object.entries(data).map(([key, value]) =>
-        //     `${key}: Joi.${getJoiTypeForValue(value)}().required()`)
-        //     .join(`,\n    `);
 
         const schemasOfEntries = Object.entries(data).map(([key, value]) =>
             `${key}: ${generateSchemaFrom(value, nestLevel + 1)}`)
