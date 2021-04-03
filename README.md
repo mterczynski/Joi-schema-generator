@@ -1,6 +1,8 @@
 # Joi schema generator (work in progress)
 
-Tool for generating schemas based on JS objects:
+Tool for generating schemas based on JS objects.
+
+Passing this object to the generator
 
 ```javascript
 {
@@ -16,7 +18,7 @@ Tool for generating schemas based on JS objects:
 }
 ```
 
-will generate:
+will generate
 
 ```javascript
 Joi.object({
