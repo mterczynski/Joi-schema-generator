@@ -50,11 +50,27 @@ describe('generateSchemaFrom', () => {
 
         });
 
-        it('should generate Joi.array with correct items', () => {
-            const input = ['id1', 'id2'];
+        describe('arrays', () => {
+            it('should generate Joi.array with correct items for string arrays', () => {
+                const input = ['id1', 'id2'];
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string().required()).required()`);
+                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string().required()).required()`);
+            })
+
+            it('should generate Joi.array with correct items for boolean arrays', () => {
+                const input = [false, true];
+
+                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.boolean().required()).required()`);
+            })
+
+            it('should generate Joi.array with correct items for number arrays', () => {
+                const input = [1, 2];
+
+                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.number().required()).required()`);
+            })
         })
+
+
     });
 
 })
