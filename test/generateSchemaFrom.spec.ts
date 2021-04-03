@@ -29,8 +29,16 @@ describe('generateSchemaFrom', () => {
 
     describe('standard scenarios', () => {
         it('should generate Joi.object with correct keys', () => {
+            const input = {
+                a: 5,
+                b: '6'
+            }
 
-        })
-    })
+            expect(generateSchemaFrom(input)).toEqual(
+`Joi.object({
+    a: Joi.number().required(),
+    b: Joi.string().required()
+}).required()`)
+    })});
 
 })

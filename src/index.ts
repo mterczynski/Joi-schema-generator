@@ -6,6 +6,25 @@ export function generateSchemaFrom(data: string | [] | object | number) {
     } else if(Array.isArray(data)) {
         return `Joi.array().required()`
     } else if(typeof data === 'object') {
-        return `Joi.object({}).required()`
+        if(Object.keys(data).length === 0) {
+            return `Joi.object({}).required()`;
+        }
+
+        const schemasOfEntries = Object.entries(data).map(([key, value]) =>
+            `${key}: Joi.${getJoiTypeForValue(value)}().required()`)
+            .join(`,\n    `);
+
+        return `Joi.object({
+    ${schemasOfEntries}
+}).required()`;
+    }
+}
+
+
+function getJoiTypeForValue(value: string | number) {
+    if(typeof value === 'string') {
+        return 'string';
+    } else if(typeof value === 'number') {
+        return 'number';
     }
 }
