@@ -6,4 +6,10 @@ describe('generateSchemaFrom', () => {
 
         expect(generateSchemaFrom(input)).toEqual(`Joi.string().required()`)
     })
+
+    it('should generate "Joi.object({})" from empty  object', () => {
+        const input = {};
+
+        expect(generateSchemaFrom(input)).toEqual(`Joi.object({}).required()`)
+    })
 })

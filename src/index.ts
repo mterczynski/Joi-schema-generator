@@ -4,6 +4,6 @@ export function generateSchemaFrom(data: string | [] | object) {
     } else if(Array.isArray(data)) {
 
     } else if(typeof data === 'object') {
-
+        return `Joi.object({}).required()`
     }
 }
