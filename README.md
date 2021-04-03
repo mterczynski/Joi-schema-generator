@@ -33,3 +33,13 @@ Joi.object({
     }).required(),
 }).required();
 ```
+
+## Scripts
+
+### npm install
+
+Install dependencies required to run the tests
+
+### npm test
+
+Runs the unit tests
