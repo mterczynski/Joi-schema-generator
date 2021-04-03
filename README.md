@@ -42,4 +42,4 @@ Install dependencies required to run the tests
 
 ### npm test
 
-Runs the unit tests
+Runs the tests
