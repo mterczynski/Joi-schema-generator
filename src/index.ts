@@ -1,8 +1,10 @@
-export function generateSchemaFrom(data: string | [] | object | number) {
+export function generateSchemaFrom(data: string | [] | object | number | boolean) {
     if(typeof data === 'string') {
         return `Joi.string().required()`
     } else if(typeof data === 'number') {
         return `Joi.number().required()`
+    } else if(typeof data === 'boolean') {
+        return `Joi.boolean().required()`
     } else if(Array.isArray(data)) {
         return `Joi.array().required()`
     } else if(typeof data === 'object') {
@@ -26,5 +28,7 @@ function getJoiTypeForValue(value: string | number) {
         return 'string';
     } else if(typeof value === 'number') {
         return 'number';
+    } else if(typeof value === 'boolean') {
+        return 'boolean';
     }
 }
