@@ -1,4 +1,4 @@
-# Joi schema generator
+# Joi schema generator (work in progress)
 
 Tool for generating schemas based on JS objects:
 
@@ -27,7 +27,7 @@ Joi.object({
         a: Joi.number().required(),
         b: Joi.string().required(),
         c: Joi.boolean().required(),
-        d: Joi.object({}).required()
-    }).required()
-}).required()
+        d: Joi.object({}).required(),
+    }).required(),
+}).required();
 ```
