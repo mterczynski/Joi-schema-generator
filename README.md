@@ -2,7 +2,7 @@
 
 Tool for generating schemas based on JS objects.
 
-Passing this object to the generator
+Example input:
 
 ```javascript
 {
@@ -18,7 +18,7 @@ Passing this object to the generator
 }
 ```
 
-will generate
+Example output:
 
 ```javascript
 Joi.object({
