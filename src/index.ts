@@ -1,4 +1,6 @@
-export function generateSchemaFrom(data: string | [] | object | number | boolean) {
+const indentSize = 4;
+
+export function generateSchemaFrom(data: string | [] | object | number | boolean, nestLevel = 0) {
     if(typeof data === 'string') {
         return `Joi.string().required()`
     } else if(typeof data === 'number') {
@@ -17,13 +19,17 @@ export function generateSchemaFrom(data: string | [] | object | number | boolean
             return `Joi.object({}).required()`;
         }
 
+        // const schemasOfEntries = Object.entries(data).map(([key, value]) =>
+        //     `${key}: Joi.${getJoiTypeForValue(value)}().required()`)
+        //     .join(`,\n    `);
+
         const schemasOfEntries = Object.entries(data).map(([key, value]) =>
-            `${key}: Joi.${getJoiTypeForValue(value)}().required()`)
-            .join(`,\n    `);
+            `${key}: ${generateSchemaFrom(value, nestLevel + 1)}`)
+            .join(`,\n${getPadding(nestLevel)}`);
 
         return `Joi.object({
-    ${schemasOfEntries}
-}).required()`;
+${getPadding(nestLevel)}${schemasOfEntries}
+${getPadding(nestLevel-1)}}).required()`;
     }
 }
 
@@ -36,4 +42,9 @@ function getJoiTypeForValue(value: string | number) {
     } else if(typeof value === 'boolean') {
         return 'boolean';
     }
+}
+
+
+function getPadding(nestLevel: number): string {
+    return ' '.repeat((nestLevel + 1) * indentSize);
 }

@@ -67,10 +67,49 @@ describe('generateSchemaFrom', () => {
                 const input = [1, 2];
 
                 expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.number().required()).required()`);
-            })
-        })
-
-
+            });
+        });
     });
 
-})
+    describe('nested objects', () => {
+        const input = {
+            a: 5,
+            b: '6',
+            c: false,
+            d: {
+                a: 5,
+                b: '6',
+                c: false,
+                d: {
+                    a: 5,
+                    b: {}
+                }
+            }
+        }
+
+        expect(generateSchemaFrom(input)).toEqual(
+`Joi.object({
+    a: Joi.number().required(),
+    b: Joi.string().required(),
+    c: Joi.boolean().required(),
+    d: Joi.object({
+        a: Joi.number().required(),
+        b: Joi.string().required(),
+        c: Joi.boolean().required(),
+        d: Joi.object({
+            a: Joi.number().required(),
+            b: Joi.object({}).required()
+        }).required()
+    }).required()
+}).required()`)
+
+    })
+
+    describe('nested arrays', () => {
+
+    })
+
+    describe('nested arrays and objects', () => {
+
+    })
+});
