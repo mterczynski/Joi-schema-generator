@@ -1,35 +1,38 @@
-import { generateSchemaFrom } from "../src";
+import { SchemaGenerator } from "../src/SchemaGenerator";
 
-describe('generateSchemaFrom', () => {
+
+describe('SchemaGenerator', () => {
+    const schemaGenerator = new SchemaGenerator();
+
     describe('most basic scenarios', () => {
         it('should generate "Joi.number()" for numbers', () => {
             const input = 5;
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.number().required()`)
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.number().required()`)
         })
 
         it('should generate "Joi.boolean()" for booleans', () => {
             const input = false;
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.boolean().required()`)
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.boolean().required()`)
         })
 
         it('should generate "Joi.string()" for strings', () => {
             const input = 'test';
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.string().required()`)
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().required()`)
         })
 
         it('should generate "Joi.object()" for empty objects', () => {
             const input = {};
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.object({}).required()`)
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.object({}).required()`)
         });
 
         it('should generate "Joi.array()" for empty arrays', () => {
             const input = [];
 
-            expect(generateSchemaFrom(input)).toEqual(`Joi.array().required()`)
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().required()`)
         })
     });
 
@@ -41,7 +44,7 @@ describe('generateSchemaFrom', () => {
                 c: false
             }
 
-            expect(generateSchemaFrom(input)).toEqual(
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
 `Joi.object({
     a: Joi.number().required(),
     b: Joi.string().required(),
@@ -54,19 +57,19 @@ describe('generateSchemaFrom', () => {
             it('should generate Joi.array with correct items for string arrays', () => {
                 const input = ['id1', 'id2'];
 
-                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string()).required()`);
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string()).required()`);
             })
 
             it('should generate Joi.array with correct items for boolean arrays', () => {
                 const input = [false, true];
 
-                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.boolean()).required()`);
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.boolean()).required()`);
             })
 
             it('should generate Joi.array with correct items for number arrays', () => {
                 const input = [1, 2];
 
-                expect(generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.number()).required()`);
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.number()).required()`);
             });
         });
     });
@@ -87,7 +90,7 @@ describe('generateSchemaFrom', () => {
             }
         }
 
-        expect(generateSchemaFrom(input)).toEqual(
+        expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
 `Joi.object({
     a: Joi.number().required(),
     b: Joi.string().required(),
@@ -114,7 +117,7 @@ describe('generateSchemaFrom', () => {
 //                     [1]
 //                 ];
 
-//                 expect(generateSchemaFrom(input)).toEqual(
+//                 expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
 // `Joi.array().items(
 //     Joi.array().items(Joi.number())
 // ).required()`);
@@ -150,7 +153,7 @@ describe('generateSchemaFrom', () => {
 //                     ]
 //                 ];
 
-//                 expect(generateSchemaFrom(input)).toEqual(
+//                 expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
 // `Joi.array().items(
 //     Joi.array().items(
 //         Joi.number()
