@@ -105,9 +105,60 @@ describe('generateSchemaFrom', () => {
 
     })
 
-    describe('nested arrays', () => {
+//     describe('nested arrays', () => {
+//         describe('nest level = 1', () => {
+//             describe('it should work for number arrays inside an array', () => {
+//                 const input = [
+//                     [1,2,3],
+//                     [1,2],
+//                     [1]
+//                 ];
 
-    })
+//                 expect(generateSchemaFrom(input)).toEqual(
+// `Joi.array().items(
+//     Joi.array().items(Joi.number())
+// ).required()`);
+//             })
+
+//             describe('it should work for boolean arrays inside an array', () => {
+//                 const input = [
+//                     [false,true,false],
+//                     [false,true],
+//                     [false]
+//                 ];
+//             })
+
+//             describe('it should work for string arrays inside an array', () => {
+//                 const input = [
+//                     ['1','2','3'],
+//                     ['1','2'],
+//                     ['1']
+//                 ];
+//             })
+//         })
+
+//         describe('nest level=2', () => {
+//             describe('it should work for number arrays inside an array', () => {
+//                 const input = [
+//                     [],
+//                     [
+//                         [1,2],
+//                         [1,2]
+//                     ],
+//                     [
+//                         [1]
+//                     ]
+//                 ];
+
+//                 expect(generateSchemaFrom(input)).toEqual(
+// `Joi.array().items(
+//     Joi.array().items(
+//         Joi.number()
+//     )
+// ).required()`);
+//             })
+//         })
+//     })
 
     describe('nested arrays and objects', () => {
 

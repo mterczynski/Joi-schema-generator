@@ -1,5 +1,7 @@
 const indentSize = 4;
 
+console.log('scripts loaded');
+
 export function generateSchemaFrom(data: string | [] | object | number | boolean, nestLevel = 0) {
     if(typeof data === 'string') {
         return `Joi.string().required()`

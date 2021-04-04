@@ -38,8 +38,16 @@ Joi.object({
 
 ### npm install
 
-Install dependencies required to run the tests
+Install dependencies required to run the app and tests
 
 ### npm test
 
 Runs the tests
+
+### npm start
+
+Runs the app in development mode (watch mode with hot reloading)
+
+### npm build
+
+Compiles the app into a deployable /build folder
