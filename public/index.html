@@ -1,22 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Joi schema generator" />
-    <link rel="stylesheet" type="text/css" href="/index.css" />
-    <title>Joi schema generator</title>
-  </head>
-  <body>
-    <textarea>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Joi schema generator" />
+        <link rel="stylesheet" type="text/css" href="/index.css" />
+        <title>Joi schema generator</title>
+    </head>
+    <body>
+        <div class="flex">
+            <div class="flex-item" style="margin-right: 10px;">
+                <h2>Input:</h2>
+                <textarea id='input-textarea' class='input-textarea text-column'>
+{
+    "a": {
+        "b": 2,
+        "c": 3
+    }
+}</textarea>
+            </div>
 
-    </textarea>
+            <div class="flex-item">
+                <h2>Output:</h2>
+                <pre id="output" class='output text-column'></pre>
+            </div>
 
-    <div id="output">
+        </div>
 
-    </div>
-
-    <script type="module" src="/dist/index.js"></script>
-  </body>
+        <script type="module" src="/dist/index.js"></script>
+    </body>
 </html>
