@@ -38,7 +38,7 @@ Joi.object({
     e: Joi.array().items(
         Joi.number()
     ).required()
-}).required();
+}).required()
 ```
 
 ## Scripts
