@@ -60,8 +60,6 @@ describe('SchemaGenerator', () => {
                 const input = ['id1', 'id2'];
                 const result = schemaGenerator.generateSchemaFrom(input);
 
-                debugger;
-
                 expect(result).toEqual(
 `Joi.array().items(
     Joi.string()
