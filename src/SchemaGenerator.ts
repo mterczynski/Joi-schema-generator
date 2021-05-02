@@ -17,7 +17,7 @@ export class SchemaGenerator {
         data: string | [] | object | number | boolean,
         nestLevel = 0,
         options: SchemaGenerationOptions = defaultSchemaGenerationOptions
-    ) {
+    ): string {
         if(typeof data === 'string') {
             return generateSchemaForString({makeFieldsRequired: options.makeFieldsRequired});
         } else if(typeof data === 'number') {
@@ -49,6 +49,8 @@ ${this.getPadding(nestLevel-1)}).required()`;
 ${this.getPadding(nestLevel)}${schemasOfEntries}
 ${this.getPadding(nestLevel-1)}}).required()`;
         }
+
+        return 'Joi.any()';
     }
 
     private getPadding(nestLevel: number): string {

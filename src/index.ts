@@ -1,6 +1,6 @@
 import { SchemaGenerator } from "./SchemaGenerator";
 
-function updateOutputValue() {
+function updateOutputValue(): void {
     try {
        const output = schemaGenerator.generateSchemaFrom(JSON.parse(inputTextArea.value));
        outputElement.innerHTML = output;
