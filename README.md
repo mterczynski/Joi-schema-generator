@@ -15,7 +15,7 @@ Example input:
     "d": {
         "a": 5,
         "b": "6",
-        "c": false,
+        "c-3": false,
         "d": {}
     },
     "e": [1, 2, 3]
@@ -32,7 +32,7 @@ Joi.object({
     d: Joi.object({
         a: Joi.number().required(),
         b: Joi.string().required(),
-        c: Joi.boolean().required(),
+        "c-3": Joi.boolean().required(),
         d: Joi.object({}).required()
     }).required(),
     e: Joi.array().items(
