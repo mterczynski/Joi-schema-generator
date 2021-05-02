@@ -196,6 +196,19 @@ describe('SchemaGenerator', () => {
     })
 
     describe('nested arrays and objects', () => {
+        it('should work for array of objects', () => {
+            const input = [
+                {a: 5, b: '6'},
+                {a: 5, b: '6'},
+            ];
 
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.object({
+        a: Joi.number().required(),
+        b: Joi.string().required()
+    })
+).required()`)
+        })
     })
 });

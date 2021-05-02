@@ -27,7 +27,7 @@ export class SchemaGenerator {
             return generateSchemaForBoolean({makeFieldsRequired: options.makeFieldsRequired});
         } else if(Array.isArray(data)) {
             if(data.length === 0) {
-                return `Joi.array().required()`
+                return `Joi.array()${this.getRequiredString(options.makeFieldsRequired)}`
             }
 
             const itemsSchema = this.generateSchemaFrom(data[0], nestLevel + 1, {
@@ -36,10 +36,10 @@ export class SchemaGenerator {
 
             return `Joi.array().items(
 ${this.getPadding(nestLevel)}${itemsSchema}
-${this.getPadding(nestLevel-1)})${options.makeFieldsRequired ? '.required()' : ''}`;
+${this.getPadding(nestLevel-1)})${this.getRequiredString(options.makeFieldsRequired)}`;
         } else if(typeof data === 'object') {
             if(Object.keys(data).length === 0) {
-                return `Joi.object({}).required()`;
+                return `Joi.object({})${this.getRequiredString(options.makeFieldsRequired)}`;
             }
 
             const schemasOfEntries = Object.entries(data).map(([key, value]) =>
@@ -48,7 +48,7 @@ ${this.getPadding(nestLevel-1)})${options.makeFieldsRequired ? '.required()' : '
 
         return `Joi.object({
 ${this.getPadding(nestLevel)}${schemasOfEntries}
-${this.getPadding(nestLevel-1)}}).required()`;
+${this.getPadding(nestLevel-1)}})${this.getRequiredString(options.makeFieldsRequired)}`;
         }
 
         return 'Joi.any()';
@@ -56,5 +56,9 @@ ${this.getPadding(nestLevel-1)}}).required()`;
 
     private getPadding(nestLevel: number): string {
         return ' '.repeat((nestLevel + 1) * this.INDENT_SIZE);
+    }
+
+    private getRequiredString(makeFieldsRequired: boolean) {
+        return makeFieldsRequired ? '.required()' : '';
     }
 }
