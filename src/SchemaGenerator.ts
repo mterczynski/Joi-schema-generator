@@ -1,6 +1,7 @@
 import { generateSchemaForBoolean } from "./generators/generateSchemaForBoolean";
 import { generateSchemaForNumber } from "./generators/generateSchemaForNumber";
 import { generateSchemaForString } from "./generators/generateSchemaForString";
+import { wrapKeyWithQuotesIfNeeded } from "./wrapKeyWithQuotesIfNeeded";
 
 interface SchemaGenerationOptions {
     makeFieldsRequired: boolean;
@@ -42,7 +43,7 @@ ${this.getPadding(nestLevel-1)}).required()`;
             }
 
             const schemasOfEntries = Object.entries(data).map(([key, value]) =>
-                `${key}: ${this.generateSchemaFrom(value, nestLevel + 1)}`)
+                `${wrapKeyWithQuotesIfNeeded(key)}: ${this.generateSchemaFrom(value, nestLevel + 1)}`)
                 .join(`,\n${this.getPadding(nestLevel)}`);
 
         return `Joi.object({

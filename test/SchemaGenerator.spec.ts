@@ -41,14 +41,16 @@ describe('SchemaGenerator', () => {
             const input = {
                 a: 5,
                 b: '6',
-                c: false
+                c: false,
+                "dash-key": 1,
             }
 
             expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
 `Joi.object({
     a: Joi.number().required(),
     b: Joi.string().required(),
-    c: Joi.boolean().required()
+    c: Joi.boolean().required(),
+    "dash-key": Joi.number().required()
 }).required()`)
 
         });
