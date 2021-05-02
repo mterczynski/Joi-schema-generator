@@ -4,17 +4,18 @@ Tool for generating schemas based on JS objects.
 
 Example input:
 
-```javascript
+```json
 {
-    a: 5,
-    b: '6',
-    c: false,
-    d: {
-        a: 5,
-        b: '6',
-        c: false,
-        d: {}
-    }
+    "a": 5,
+    "b": "6",
+    "c": false,
+    "d": {
+        "a": 5,
+        "b": "6",
+        "c": false,
+        "d": {}
+    },
+    "e": [1, 2, 3]
 }
 ```
 
@@ -29,8 +30,11 @@ Joi.object({
         a: Joi.number().required(),
         b: Joi.string().required(),
         c: Joi.boolean().required(),
-        d: Joi.object({}).required(),
+        d: Joi.object({}).required()
     }).required(),
+    e: Joi.array().items(
+        Joi.number()
+    ).required()
 }).required();
 ```
 
