@@ -27,7 +27,7 @@ pipeline {
     stage('Deploy') {
       steps {
         sh '''
-          scp -r build ${DESTINATION}
+          scp -r build/* ${DESTINATION}
           exit
         '''
       }
