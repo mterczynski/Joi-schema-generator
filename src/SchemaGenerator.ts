@@ -1,20 +1,41 @@
+import { generateSchemaForBoolean } from "./generators/generateSchemaForBoolean";
+import { generateSchemaForNumber } from "./generators/generateSchemaForNumber";
+import { generateSchemaForString } from "./generators/generateSchemaForString";
+
+interface SchemaGenerationOptions {
+    makeFieldsRequired: boolean;
+}
+
+const defaultSchemaGenerationOptions: SchemaGenerationOptions = {
+    makeFieldsRequired: true
+};
+
 export class SchemaGenerator {
     private readonly INDENT_SIZE = 4;
 
-    generateSchemaFrom(data: string | [] | object | number | boolean, nestLevel = 0) {
+    generateSchemaFrom(
+        data: string | [] | object | number | boolean,
+        nestLevel = 0,
+        options: SchemaGenerationOptions = defaultSchemaGenerationOptions
+    ) {
         if(typeof data === 'string') {
-            return `Joi.string().required()`
+            return generateSchemaForString({makeFieldsRequired: options.makeFieldsRequired});
         } else if(typeof data === 'number') {
-            return `Joi.number().required()`
+            return generateSchemaForNumber({makeFieldsRequired: options.makeFieldsRequired});
         } else if(typeof data === 'boolean') {
-            return `Joi.boolean().required()`
+            return generateSchemaForBoolean({makeFieldsRequired: options.makeFieldsRequired});
         } else if(Array.isArray(data)) {
             if(data.length === 0) {
                 return `Joi.array().required()`
             }
 
-            const firstValue = data[0];
-            return `Joi.array().items(Joi.${this.getJoiTypeForValue(firstValue)}()).required()`;
+            const itemsSchema = this.generateSchemaFrom(data[0], nestLevel + 1, {
+                makeFieldsRequired: false
+            });
+
+            return `Joi.array().items(
+${this.getPadding(nestLevel)}${itemsSchema}
+${this.getPadding(nestLevel-1)}).required()`;
         } else if(typeof data === 'object') {
             if(Object.keys(data).length === 0) {
                 return `Joi.object({}).required()`;
@@ -27,16 +48,6 @@ export class SchemaGenerator {
         return `Joi.object({
 ${this.getPadding(nestLevel)}${schemasOfEntries}
 ${this.getPadding(nestLevel-1)}}).required()`;
-        }
-    }
-
-    private getJoiTypeForValue(value: string | number) {
-        if(typeof value === 'string') {
-            return 'string';
-        } else if(typeof value === 'number') {
-            return 'number';
-        } else if(typeof value === 'boolean') {
-            return 'boolean';
         }
     }
 

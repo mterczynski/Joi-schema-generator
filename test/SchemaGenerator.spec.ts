@@ -56,20 +56,33 @@ describe('SchemaGenerator', () => {
         describe('arrays', () => {
             it('should generate Joi.array with correct items for string arrays', () => {
                 const input = ['id1', 'id2'];
+                const result = schemaGenerator.generateSchemaFrom(input);
 
-                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.string()).required()`);
+                debugger;
+
+                expect(result).toEqual(
+`Joi.array().items(
+    Joi.string()
+).required()`
+                );
             })
 
             it('should generate Joi.array with correct items for boolean arrays', () => {
                 const input = [false, true];
 
-                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.boolean()).required()`);
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.boolean()
+).required()`);
             })
 
             it('should generate Joi.array with correct items for number arrays', () => {
                 const input = [1, 2];
 
-                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.array().items(Joi.number()).required()`);
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.number()
+).required()`);
             });
         });
     });
@@ -108,37 +121,52 @@ describe('SchemaGenerator', () => {
 
     })
 
-//     describe('nested arrays', () => {
-//         describe('nest level = 1', () => {
-//             describe('it should work for number arrays inside an array', () => {
-//                 const input = [
-//                     [1,2,3],
-//                     [1,2],
-//                     [1]
-//                 ];
+    describe('nested arrays', () => {
+        describe('nest level = 1', () => {
+            it('should work for number arrays inside an array', () => {
+                const input = [
+                    [1,2,3],
+                    [1,2],
+                    [1]
+                ];
 
-//                 expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
-// `Joi.array().items(
-//     Joi.array().items(Joi.number())
-// ).required()`);
-//             })
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.array().items(
+        Joi.number()
+    ).required()
+).required()`);
+            })
 
-//             describe('it should work for boolean arrays inside an array', () => {
-//                 const input = [
-//                     [false,true,false],
-//                     [false,true],
-//                     [false]
-//                 ];
-//             })
+            it('should work for boolean arrays inside an array', () => {
+                const input = [
+                    [false,true,false],
+                    [false,true],
+                    [false]
+                ];
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.array().items(
+        Joi.boolean()
+    ).required()
+).required()`);
+            })
 
-//             describe('it should work for string arrays inside an array', () => {
-//                 const input = [
-//                     ['1','2','3'],
-//                     ['1','2'],
-//                     ['1']
-//                 ];
-//             })
-//         })
+            it('should work for string arrays inside an array', () => {
+                const input = [
+                    ['1','2','3'],
+                    ['1','2'],
+                    ['1']
+                ];
+
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.array().items(
+        Joi.string()
+    ).required()
+).required()`);
+            })
+        })
 
 //         describe('nest level=2', () => {
 //             describe('it should work for number arrays inside an array', () => {
@@ -161,7 +189,7 @@ describe('SchemaGenerator', () => {
 // ).required()`);
 //             })
 //         })
-//     })
+    })
 
     describe('nested arrays and objects', () => {
 
