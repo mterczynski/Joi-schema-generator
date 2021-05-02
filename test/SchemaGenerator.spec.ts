@@ -1,3 +1,4 @@
+import Joi from "joi";
 import { SchemaGenerator } from "../src/SchemaGenerator";
 
 
@@ -210,5 +211,52 @@ describe('SchemaGenerator', () => {
     })
 ).required()`)
         })
+    });
+
+    it('should work for arrays and objects nested multiple times', () => {
+        const input = {
+            patients: [
+                {
+                    id: '1312323',
+                    name: 'John',
+                    visits: [
+                        {
+                            date: '03-04-2020',
+                            tests: [
+                                {
+                                    id: '12312332',
+                                    type: 'sugar blood test'
+                                },
+                                {
+                                    id: '50238482',
+                                    type: 'sight test'
+                                },
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+
+        expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.object({
+    patients: Joi.array().items(
+        Joi.object({
+            id: Joi.string().required(),
+            name: Joi.string().required(),
+            visits: Joi.array().items(
+                Joi.object({
+                    date: Joi.string().required(),
+                    tests: Joi.array().items(
+                        Joi.object({
+                            id: Joi.string().required(),
+                            type: Joi.string().required()
+                        })
+                    ).required()
+                })
+            ).required()
+        })
+    ).required()
+}).required()`)
     })
 });
