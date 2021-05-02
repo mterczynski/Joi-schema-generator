@@ -9,6 +9,7 @@ body {
     height: 100vh;
     width: 100vw;
     position: relative;
+    font-size: 1.2rem;
 }
 
 .flex {
@@ -27,6 +28,7 @@ body {
 }
 
 .input-textarea {
+    font-size: 1.2rem;
     background: indigo;
 }
 
@@ -38,7 +40,7 @@ body {
     overflow: auto;
     height: 100%;
     box-sizing: border-box;
-    border: 1px solid white;
+    /* border: 1px solid white; */
     min-width: 320px;
     width: 100%;
     padding: 10px;
