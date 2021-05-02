@@ -134,7 +134,7 @@ describe('SchemaGenerator', () => {
 `Joi.array().items(
     Joi.array().items(
         Joi.number()
-    ).required()
+    )
 ).required()`);
             })
 
@@ -148,7 +148,7 @@ describe('SchemaGenerator', () => {
 `Joi.array().items(
     Joi.array().items(
         Joi.boolean()
-    ).required()
+    )
 ).required()`);
             })
 
@@ -163,32 +163,36 @@ describe('SchemaGenerator', () => {
 `Joi.array().items(
     Joi.array().items(
         Joi.string()
-    ).required()
+    )
 ).required()`);
             })
         })
 
-//         describe('nest level=2', () => {
-//             describe('it should work for number arrays inside an array', () => {
-//                 const input = [
-//                     [],
-//                     [
-//                         [1,2],
-//                         [1,2]
-//                     ],
-//                     [
-//                         [1]
-//                     ]
-//                 ];
+        describe('nest level=2', () => {
+            it('should work for number arrays inside an array', () => {
+                const input = [
+                    [
+                        [1,2]
+                    ],
+                    [
+                        [1,2],
+                        [1,2]
+                    ],
+                    [
+                        [1]
+                    ]
+                ];
 
-//                 expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
-// `Joi.array().items(
-//     Joi.array().items(
-//         Joi.number()
-//     )
-// ).required()`);
-//             })
-//         })
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(
+`Joi.array().items(
+    Joi.array().items(
+        Joi.array().items(
+            Joi.number()
+        )
+    )
+).required()`);
+            })
+        })
     })
 
     describe('nested arrays and objects', () => {

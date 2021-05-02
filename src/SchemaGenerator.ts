@@ -36,7 +36,7 @@ export class SchemaGenerator {
 
             return `Joi.array().items(
 ${this.getPadding(nestLevel)}${itemsSchema}
-${this.getPadding(nestLevel-1)}).required()`;
+${this.getPadding(nestLevel-1)})${options.makeFieldsRequired ? '.required()' : ''}`;
         } else if(typeof data === 'object') {
             if(Object.keys(data).length === 0) {
                 return `Joi.object({}).required()`;
