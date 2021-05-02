@@ -52,6 +52,6 @@ Runs the tests
 
 Runs the app in development mode (watch mode with hot reloading)
 
-### npm build
+### npm run build
 
 Compiles the app into a deployable /build folder
