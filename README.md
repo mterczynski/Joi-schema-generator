@@ -38,7 +38,7 @@ Joi.object({
 
 ### npm install
 
-Install dependencies required to run the app and tests
+Installs dependencies required to run the app and tests
 
 ### npm test
 
