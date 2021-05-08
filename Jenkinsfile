@@ -1,36 +1,38 @@
 pipeline {
-  agent any
+    agent any
 
-  environment {
-    DESTINATION = "root@mterczynski.pl:/var/www/html/joi-schema-generator"
-  }
-
-  stages {
-    stage('Install') {
-      steps {
-        sh "npm install"
-      }
+    environment {
+        DESTINATION = "root@mterczynski.pl:/var/www/html/joi-schema-generator"
     }
 
-    stage('Test') {
-      steps {
-        sh "npm test"
-      }
-    }
+    tools {nodejs "nodejs"}
 
-    stage('Build') {
-      steps {
-        sh "npm run build"
-      }
-    }
+    stages {
+        stage('Install') {
+            steps {
+                sh "npm install"
+            }
+        }
 
-    stage('Deploy') {
-      steps {
-        sh '''
-          scp -r build/* ${DESTINATION}
-          exit
-        '''
-      }
+        stage('Test') {
+            steps {
+                sh "npm test"
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh "npm run build"
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                sh '''
+                scp -r build/* ${DESTINATION}
+                exit
+                '''
+            }
+        }
     }
-  }
 }
