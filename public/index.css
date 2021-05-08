@@ -10,6 +10,7 @@ body {
     width: 100vw;
     position: relative;
     font-size: 1.2rem;
+    font-family: 'Segoe UI', Calibri, Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .flex {
@@ -28,6 +29,7 @@ body {
 }
 
 .input-textarea {
+    font-family: Consolas, monospace;
     font-size: 1.2rem;
     background: transparent;
     color: hsl(264, 56%, 72%);
