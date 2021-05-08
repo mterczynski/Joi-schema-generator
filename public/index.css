@@ -29,11 +29,8 @@ body {
 
 .input-textarea {
     font-size: 1.2rem;
-    background: indigo;
-}
-
-.output {
-    background: rgb(7, 44, 104);
+    background: transparent;
+    color: hsl(264, 56%, 72%);
 }
 
 .text-column {
