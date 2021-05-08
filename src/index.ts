@@ -14,7 +14,7 @@ function updateOutputValue(): void {
     }
 }
 
-function getInputValue() {
+function getInputValue(): any {
     try {
         return JSON.parse(inputTextArea.value);
     } catch {
