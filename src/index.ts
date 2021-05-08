@@ -3,12 +3,22 @@ import Prism from 'prismjs';
 
 function updateOutputValue(): void {
     try {
-        const output = schemaGenerator.generateSchemaFrom(JSON.parse(inputTextArea.value));
+        const inputValue = getInputValue();
+
+        const output = schemaGenerator.generateSchemaFrom(inputValue);
         const prismHtml = Prism.highlight(output, Prism.languages.javascript, 'javascript');
 
         outputElement.innerHTML = prismHtml;
     } catch(error) {
        console.log('invalid input')
+    }
+}
+
+function getInputValue() {
+    try {
+        return JSON.parse(inputTextArea.value);
+    } catch {
+        return eval("(" + inputTextArea.value + ")");
     }
 }
 
