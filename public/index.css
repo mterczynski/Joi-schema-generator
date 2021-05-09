@@ -33,6 +33,11 @@ body {
     font-size: 1.2rem;
     background: transparent;
     color: hsl(264, 56%, 72%);
+    outline: none;
+}
+
+.input-textarea:focus {
+    outline: 1px solid rgb(138, 138, 138);
 }
 
 .text-column {
@@ -42,4 +47,23 @@ body {
     min-width: 320px;
     width: 100%;
     padding: 10px;
+}
+
+::-webkit-scrollbar {
+width: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+}
+
+
+::-webkit-scrollbar-thumb {
+background: #888;
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+background: #555;
 }
