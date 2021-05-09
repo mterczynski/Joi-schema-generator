@@ -5,8 +5,6 @@ pipeline {
         DESTINATION = "root@mterczynski.pl:/var/www/html/joi-schema-generator"
     }
 
-    tools {nodejs "nodejs"}
-
     stages {
         stage('Install') {
             steps {
