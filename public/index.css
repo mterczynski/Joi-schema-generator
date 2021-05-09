@@ -47,6 +47,11 @@ body {
     min-width: 320px;
     width: 100%;
     padding: 10px;
+    margin: 0 !important;
+}
+
+.column-header {
+    margin-bottom: 10px;
 }
 
 ::-webkit-scrollbar {
