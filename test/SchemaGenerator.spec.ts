@@ -37,6 +37,12 @@ describe('SchemaGenerator', () => {
                     expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().ip().required()`);
                 });
             });
+
+            it('should generate Joi.string().isoDate() for iso date strings', () => {
+                const input = '2018-11-28T18:25:32+00:00';
+
+                expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().isoDate().required()`);
+            });
         });
 
         it('should generate "Joi.number()" for numbers', () => {
