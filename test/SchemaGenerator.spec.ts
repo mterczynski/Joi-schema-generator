@@ -23,6 +23,20 @@ describe('SchemaGenerator', () => {
 
                 expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().email().required()`)
             });
+
+            describe('should generate Joi.string().ip() if data is ip v4 or ip v6 string', () => {
+                it('works for ipv4', () => {
+                    const input = '192.168.0.1';
+
+                    expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().ip().required()`);
+                });
+
+                it('works for ipv6', () => {
+                    const input = '1:2:3:4:5:6:7:8';
+
+                    expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().ip().required()`);
+                });
+            });
         });
 
         it('should generate "Joi.number()" for numbers', () => {
