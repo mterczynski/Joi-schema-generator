@@ -1,4 +1,3 @@
-import Joi from "joi";
 import { SchemaGenerator } from "../src/SchemaGenerator";
 
 
@@ -22,7 +21,13 @@ describe('SchemaGenerator', () => {
             const input = 'test';
 
             expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().required()`)
-        })
+        });
+
+        it('should generate "Joi.string().uuid()" for uuids', () => {
+            const input = '53c59574-af2e-450f-b4df-70ac6f5c63f1';
+
+            expect(schemaGenerator.generateSchemaFrom(input)).toEqual(`Joi.string().uuid().required()`)
+        });
 
         it('should generate "Joi.object()" for empty objects', () => {
             const input = {};

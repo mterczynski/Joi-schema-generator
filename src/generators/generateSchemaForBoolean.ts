@@ -1,9 +1,7 @@
-export function generateSchemaForBoolean({
+export function generateSchemaForBoolean(value: boolean, {
     makeFieldsRequired = true,
 } = {}): string {
-    if(makeFieldsRequired) {
-        return `Joi.boolean().required()`;
-    } else {
-        return `Joi.boolean()`;
-    }
+    const required = makeFieldsRequired ? '.required()' : '';
+
+    return `Joi.boolean()${required}`;
 }

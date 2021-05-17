@@ -1,9 +1,7 @@
-export function generateSchemaForNumber({
+export function generateSchemaForNumber(value: number, {
     makeFieldsRequired = true,
 } = {}): string {
-    if(makeFieldsRequired) {
-        return `Joi.number().required()`;
-    } else {
-        return `Joi.number()`;
-    }
+    const required = makeFieldsRequired ? '.required()' : '';
+
+    return `Joi.number()${required}`;
 }

@@ -20,11 +20,11 @@ export class SchemaGenerator {
         options: SchemaGenerationOptions = defaultSchemaGenerationOptions
     ): string {
         if(typeof data === 'string') {
-            return generateSchemaForString({makeFieldsRequired: options.makeFieldsRequired});
+            return generateSchemaForString(data, {makeFieldsRequired: options.makeFieldsRequired});
         } else if(typeof data === 'number') {
-            return generateSchemaForNumber({makeFieldsRequired: options.makeFieldsRequired});
+            return generateSchemaForNumber(data, {makeFieldsRequired: options.makeFieldsRequired});
         } else if(typeof data === 'boolean') {
-            return generateSchemaForBoolean({makeFieldsRequired: options.makeFieldsRequired});
+            return generateSchemaForBoolean(data, {makeFieldsRequired: options.makeFieldsRequired});
         } else if(Array.isArray(data)) {
             if(data.length === 0) {
                 return `Joi.array()${this.getRequiredString(options.makeFieldsRequired)}`
