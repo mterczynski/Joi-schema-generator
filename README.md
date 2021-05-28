@@ -1,6 +1,6 @@
-# Joi schema generator (work in progress)
+# Joi schema generator
 
-Tool for generating schemas based on JS objects.  
+Tool for generating schemas based on JS/JSON objects/arrays.  
 Application is available on http://mterczynski.pl/joi-schema-generator
 
 <img src="preview.png">
