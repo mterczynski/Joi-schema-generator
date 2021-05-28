@@ -1,6 +1,8 @@
 import { SchemaGenerator } from "./SchemaGenerator";
 import Prism from 'prismjs';
 
+const invalidTextareaClass = 'input-textarea-invalid';
+
 function updateOutputValue(): void {
     try {
         const inputValue = getInputValue();
@@ -9,8 +11,9 @@ function updateOutputValue(): void {
         const prismHtml = Prism.highlight(output, Prism.languages.javascript, 'javascript');
 
         outputElement.innerHTML = prismHtml;
+        inputTextArea.classList.remove(invalidTextareaClass);
     } catch(error) {
-       console.log('invalid input')
+        inputTextArea.classList.add(invalidTextareaClass);
     }
 }
 

@@ -36,6 +36,10 @@ body {
     outline: none;
 }
 
+.input-textarea-invalid {
+    background: rgba(255, 0, 0, 0.2);
+}
+
 .input-textarea:focus {
     outline: 1px solid rgb(138, 138, 138);
 }
