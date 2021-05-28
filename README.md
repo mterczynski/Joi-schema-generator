@@ -9,16 +9,23 @@ Example input:
 
 ```json
 {
-    "a": 5,
-    "b": "6",
-    "c": false,
-    "d": {
-        "a": 5,
-        "b": "6",
-        "c-3": false,
-        "d": {}
-    },
-    "e": [1, 2, 3]
+  "squadName": "Super hero squad",
+  "homeTown": "Metro City",
+  "formed": 20,
+  "secretBase": "Super tower",
+  "active": true,
+  "members": [
+    {
+      "name": "Molecule Man",
+      "age": 29,
+      "secretIdentity": "Dan Jukes",
+      "powers": [
+        "Radiation resistance",
+        "Turning tiny",
+        "Radiation blast"
+      ]
+    }
+  ]
 }
 ```
 
@@ -26,17 +33,20 @@ Example output:
 
 ```javascript
 Joi.object({
-    a: Joi.number().required(),
-    b: Joi.string().required(),
-    c: Joi.boolean().required(),
-    d: Joi.object({
-        a: Joi.number().required(),
-        b: Joi.string().required(),
-        "c-3": Joi.boolean().required(),
-        d: Joi.object({}).required()
-    }).required(),
-    e: Joi.array().items(
-        Joi.number()
+    squadName: Joi.string().required(),
+    homeTown: Joi.string().required(),
+    formed: Joi.number().required(),
+    secretBase: Joi.string().required(),
+    active: Joi.boolean().required(),
+    members: Joi.array().items(
+        Joi.object({
+            name: Joi.string().required(),
+            age: Joi.number().required(),
+            secretIdentity: Joi.string().required(),
+            powers: Joi.array().items(
+                Joi.string()
+            ).required()
+        })
     ).required()
 }).required()
 ```
