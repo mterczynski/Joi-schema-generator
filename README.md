@@ -1,7 +1,7 @@
 # Joi schema generator
 
 Tool for generating schemas based on JS/JSON objects/arrays.  
-Application is available on http://mterczynski.pl/joi-schema-generator
+The application is available on http://mterczynski.pl/joi-schema-generator
 
 <img src="preview.png">
 
@@ -55,7 +55,7 @@ Joi.object({
 
 ### npm install
 
-Installs dependencies required to run the app and tests
+Installs dependencies required to run the application and tests
 
 ### npm test
 
@@ -63,8 +63,8 @@ Runs the tests
 
 ### npm start
 
-Runs the app in development mode (watch mode with hot reloading)
+Runs the application in development mode (it uses watch mode with hot reloading)
 
 ### npm run build
 
-Compiles the app into a deployable /build folder
+Compiles the application into a deployable build folder
