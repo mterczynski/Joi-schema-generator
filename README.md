@@ -9,23 +9,23 @@ Example input:
 
 ```json
 {
-  "squadName": "Super hero squad",
-  "homeTown": "Metro City",
-  "formed": 20,
-  "secretBase": "Super tower",
-  "active": true,
-  "members": [
-    {
-      "name": "Molecule Man",
-      "age": 29,
-      "secretIdentity": "Dan Jukes",
-      "powers": [
-        "Radiation resistance",
-        "Turning tiny",
-        "Radiation blast"
-      ]
-    }
-  ]
+    "squadName": "Super hero squad",
+    "homeTown": "Metro City",
+    "formed": 20,
+    "secretBase": "Super tower",
+    "active": true,
+    "members": [
+        {
+            "name": "Molecule Man",
+            "age": 29,
+            "secretIdentity": "Dan Jukes",
+            "powers": [
+                "Radiation resistance",
+                "Turning tiny",
+                "Radiation blast"
+            ]
+        }
+    ]
 }
 ```
 
@@ -38,18 +38,22 @@ Joi.object({
     formed: Joi.number().required(),
     secretBase: Joi.string().required(),
     active: Joi.boolean().required(),
-    members: Joi.array().items(
-        Joi.object({
-            name: Joi.string().required(),
-            age: Joi.number().required(),
-            secretIdentity: Joi.string().required(),
-            powers: Joi.array().items(
-                Joi.string()
-            ).required()
-        })
-    ).required()
-}).required()
+    members: Joi.array()
+        .items(
+            Joi.object({
+                name: Joi.string().required(),
+                age: Joi.number().required(),
+                secretIdentity: Joi.string().required(),
+                powers: Joi.array().items(Joi.string()).required(),
+            })
+        )
+        .required(),
+}).required();
 ```
+
+## Color palette
+
+https://coolors.co/b090e0-f08d49-2d2d2d-3a7f52
 
 ## Scripts
 
