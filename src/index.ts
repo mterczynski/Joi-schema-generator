@@ -48,9 +48,11 @@ function hideSettingsModal() {
 
 function applyNewSettings() {
     const makeFieldsRequired = makePropertiesRequiredInput.checked;
+    const useTrailingCommas = useTrailingCommasInput.checked;
 
     const settings: SchemaGenerationSettings = {
         makeFieldsRequired,
+        useTrailingCommas,
     };
 
     schemaGenerator.applySettings(settings);
@@ -65,6 +67,7 @@ function loadSettings() {
         schemaGenerator.applySettings(settings);
 
         makePropertiesRequiredInput.checked = settings.makeFieldsRequired;
+        useTrailingCommasInput.checked = settings.useTrailingCommas;
     }
 }
 
@@ -90,6 +93,9 @@ const settingsSaveButton = document.getElementById(
 const localStorageSettingsKey = "settings";
 const makePropertiesRequiredInput = document.getElementById(
     "setting-make-properties-required"
+) as HTMLInputElement;
+const useTrailingCommasInput = document.getElementById(
+    "setting-use-trailing-commas"
 ) as HTMLInputElement;
 const schemaGenerator = new SchemaGenerator();
 

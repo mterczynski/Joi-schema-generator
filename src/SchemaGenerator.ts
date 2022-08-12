@@ -5,10 +5,12 @@ import { wrapKeyWithQuotesIfNeeded } from "./wrapKeyWithQuotesIfNeeded";
 
 export interface SchemaGenerationSettings {
     makeFieldsRequired: boolean;
+    useTrailingCommas: boolean;
 }
 
 const defaultSchemaGenerationSettings: SchemaGenerationSettings = {
     makeFieldsRequired: true,
+    useTrailingCommas: false,
 };
 
 export class SchemaGenerator {
@@ -49,7 +51,9 @@ export class SchemaGenerator {
             );
 
             return `Joi.array().items(
-${this.getPadding(nestLevel)}${itemsSchema}
+${this.getPadding(nestLevel)}${itemsSchema}${
+                options.useTrailingCommas ? "," : ""
+            }
 ${this.getPadding(nestLevel - 1)})${this.getRequiredString(
                 options.makeFieldsRequired
             )}`;
@@ -60,14 +64,19 @@ ${this.getPadding(nestLevel - 1)})${this.getRequiredString(
                 )}`;
             }
 
-            const schemasOfEntries = Object.entries(data)
-                .map(
-                    ([key, value]) =>
-                        `${wrapKeyWithQuotesIfNeeded(
-                            key
-                        )}: ${this.generateSchemaFrom(value, nestLevel + 1)}`
-                )
-                .join(`,\n${this.getPadding(nestLevel)}`);
+            const schemasOfEntries =
+                Object.entries(data)
+                    .map(
+                        ([key, value]) =>
+                            `${wrapKeyWithQuotesIfNeeded(
+                                key
+                            )}: ${this.generateSchemaFrom(
+                                value,
+                                nestLevel + 1
+                            )}`
+                    )
+                    .join(`,\n${this.getPadding(nestLevel)}`) +
+                (options.useTrailingCommas ? "," : "");
 
             return `Joi.object({
 ${this.getPadding(nestLevel)}${schemasOfEntries}
@@ -79,8 +88,8 @@ ${this.getPadding(nestLevel - 1)}})${this.getRequiredString(
         return "Joi.any()";
     }
 
-    applySettings(settings: SchemaGenerationSettings) {
-        this.settings = settings;
+    applySettings(settings: Partial<SchemaGenerationSettings>) {
+        this.settings = { ...this.settings, ...settings };
     }
 
     resetSettings() {

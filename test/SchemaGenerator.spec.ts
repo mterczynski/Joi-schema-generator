@@ -309,17 +309,20 @@ describe("SchemaGenerator", () => {
     });
 
     describe("settings", () => {
-        describe("makeFieldsRequired", () => {
-            const input = {
-                prop1: ["test"],
-                prop2: {
-                    subProp: true,
-                },
-            };
+        const input = {
+            prop1: ["test"],
+            prop2: {
+                subProp: true,
+            },
+        };
 
+        describe("makeFieldsRequired", () => {
             it(`should cause schema generator to mark all fields as required when enabled
                 (except items in array - we want to allow empty arrays)`, () => {
-                schemaGenerator.applySettings({ makeFieldsRequired: true });
+                schemaGenerator.applySettings({
+                    makeFieldsRequired: true,
+                    useTrailingCommas: false,
+                });
                 const generatedSchema =
                     schemaGenerator.generateSchemaFrom(input);
                 expect(generatedSchema).toEqual(`Joi.object({
@@ -333,7 +336,10 @@ describe("SchemaGenerator", () => {
             });
 
             it("should cause schema generator to not mark any fields as required when disabled", () => {
-                schemaGenerator.applySettings({ makeFieldsRequired: false });
+                schemaGenerator.applySettings({
+                    makeFieldsRequired: false,
+                    useTrailingCommas: false,
+                });
                 const generatedSchema =
                     schemaGenerator.generateSchemaFrom(input);
                 expect(generatedSchema).toEqual(
@@ -346,6 +352,44 @@ describe("SchemaGenerator", () => {
     })
 })`
                 );
+            });
+        });
+
+        describe("useTrailingCommas", () => {
+            it(`should cause schema generator to generate schemas where Joi objects and arrays have trailing commas
+            `, () => {
+                schemaGenerator.applySettings({
+                    makeFieldsRequired: false,
+                    useTrailingCommas: true,
+                });
+                const generatedSchema =
+                    schemaGenerator.generateSchemaFrom(input);
+                expect(generatedSchema).toEqual(`Joi.object({
+    prop1: Joi.array().items(
+        Joi.string(),
+    ),
+    prop2: Joi.object({
+        subProp: Joi.boolean(),
+    }),
+})`);
+            });
+
+            it(`should cause schema generator to generate schemas where Joi objects and arrays don't have trailing commas when disabled
+            `, () => {
+                schemaGenerator.applySettings({
+                    makeFieldsRequired: false,
+                    useTrailingCommas: false,
+                });
+                const generatedSchema =
+                    schemaGenerator.generateSchemaFrom(input);
+                expect(generatedSchema).toEqual(`Joi.object({
+    prop1: Joi.array().items(
+        Joi.string()
+    ),
+    prop2: Joi.object({
+        subProp: Joi.boolean()
+    })
+})`);
             });
         });
     });
