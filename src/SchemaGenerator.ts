@@ -3,7 +3,7 @@ import { generateSchemaForNumber } from "./generators/generateSchemaForNumber";
 import { generateSchemaForString } from "./generators/generateSchemaForString";
 import { wrapKeyWithQuotesIfNeeded } from "./wrapKeyWithQuotesIfNeeded";
 
-interface SchemaGenerationSettings {
+export interface SchemaGenerationSettings {
     makeFieldsRequired: boolean;
 }
 

@@ -1,4 +1,4 @@
-import { SchemaGenerator } from "./SchemaGenerator";
+import { SchemaGenerationSettings, SchemaGenerator } from "./SchemaGenerator";
 import Prism from "prismjs";
 
 function updateOutputValue(): void {
@@ -53,9 +53,21 @@ function applyNewSettings() {
         ) as HTMLInputElement
     ).checked;
 
-    schemaGenerator.applySettings({
+    const settings: SchemaGenerationSettings = {
         makeFieldsRequired,
-    });
+    };
+
+    schemaGenerator.applySettings(settings);
+    localStorage.setItem(localStorageSettingsKey, JSON.stringify(settings));
+}
+
+function loadSettings() {
+    const savedSettings = localStorage.getItem(localStorageSettingsKey);
+
+    if (savedSettings) {
+        const settings = JSON.parse(savedSettings) as SchemaGenerationSettings;
+        schemaGenerator.applySettings(settings);
+    }
 }
 
 const inputTextArea = document.getElementById(
@@ -77,12 +89,13 @@ const settingsCancelButton = document.getElementById(
 const settingsSaveButton = document.getElementById(
     "settings-save-button"
 ) as HTMLButtonElement;
-
+const localStorageSettingsKey = "settings";
 const schemaGenerator = new SchemaGenerator();
 
 let isValidInput = true;
 let copyButtonTextChangeTimeout: number;
 
+loadSettings();
 updateOutputValue();
 inputTextArea.focus();
 
