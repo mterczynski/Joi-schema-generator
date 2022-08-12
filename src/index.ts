@@ -47,11 +47,7 @@ function hideSettingsModal() {
 }
 
 function applyNewSettings() {
-    const makeFieldsRequired = (
-        document.getElementById(
-            "setting-make-all-properties-required"
-        ) as HTMLInputElement
-    ).checked;
+    const makeFieldsRequired = makePropertiesRequiredInput.checked;
 
     const settings: SchemaGenerationSettings = {
         makeFieldsRequired,
@@ -67,6 +63,8 @@ function loadSettings() {
     if (savedSettings) {
         const settings = JSON.parse(savedSettings) as SchemaGenerationSettings;
         schemaGenerator.applySettings(settings);
+
+        makePropertiesRequiredInput.checked = settings.makeFieldsRequired;
     }
 }
 
@@ -90,6 +88,9 @@ const settingsSaveButton = document.getElementById(
     "settings-save-button"
 ) as HTMLButtonElement;
 const localStorageSettingsKey = "settings";
+const makePropertiesRequiredInput = document.getElementById(
+    "setting-make-properties-required"
+) as HTMLInputElement;
 const schemaGenerator = new SchemaGenerator();
 
 let isValidInput = true;
