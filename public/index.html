@@ -63,9 +63,35 @@
                 <pre class='language-javascript text-column'>
 <code id="output"></code>
                 </pre>
-                <button class="button copy-button" id="copy-to-clipboard-button">Copy to clipboard</button>
+                <!-- reasons for hiding: https://github.com/mterczynski/Joi-schema-generator/issues/1 -->
+                <button class="button copy-button" id="copy-to-clipboard-button" style="display: none;">Copy to clipboard</button>
+                <button class="button settings-button" id="settings-button">Settings</button>
             </div>
 
+        </div>
+
+        <div id="settings-modal-overlay" class="modal-overlay modal-hidden">
+            <div class="modal">
+                <h3>
+                    Settings
+                </h3>
+                <form>
+                    <ul class="settings-list">
+                        <li>
+                            <input id="setting-make-all-properties-required" type="checkbox" checked>
+                            <label for="setting-make-all-properties-required" class="clickable">
+                                Make properties required
+                            </label>
+                        </li>
+                    </ul>
+                    <button id="settings-save-button" type="button" class="button form-button button-info">
+                        Save
+                    </button>
+                    <button id="settings-cancel-button" type="button" class="button form-button button-cancel">
+                        Cancel
+                    </button>
+                </form>
+            </div>
         </div>
 
         <script type="module" src="./dist/index.js"></script>

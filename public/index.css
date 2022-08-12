@@ -1,5 +1,9 @@
 :root {
     --font-family: "Segoe UI", Calibri, Tahoma, Geneva, Verdana, sans-serif;
+    --color-gray: rgb(32, 32, 32);
+    --color-purple: hsl(264, 56%, 72%);
+    --color-green: #3a7f52;
+    --color-teal: #0f7970;
 }
 
 * {
@@ -8,7 +12,7 @@
 }
 
 body {
-    background: rgb(32, 32, 32);
+    background: var(--color-gray);
     box-sizing: border-box;
     height: 100vh;
     width: 100vw;
@@ -36,7 +40,7 @@ body {
     font-family: Consolas, monospace;
     font-size: 1.2rem;
     background: transparent;
-    color: hsl(264, 56%, 72%);
+    color: var(--color-purple);
     outline: none;
 }
 
@@ -66,7 +70,7 @@ body {
     width: 100%;
     height: 40px;
     font-size: 16px;
-    background-color: #3a7f52;
+    background-color: var(--color-green);
     color: white;
     border: none;
     outline: none;
@@ -76,6 +80,55 @@ body {
 
 .button[disabled="disabled"] {
     filter: grayscale(100%);
+}
+
+.button-cancel {
+    background: rgb(120, 120, 120);
+}
+
+.settings-button {
+    background-color: var(--color-teal);
+}
+
+.modal {
+    position: absolute;
+    z-index: 3;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--color-gray);
+    border: 1px solid rgb(138, 138, 138);
+    padding: 15px;
+}
+
+.modal-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    background-color: rgb(32, 32, 32, 0.5);
+    width: 100vw;
+    height: 100vh;
+}
+
+.modal-hidden {
+    display: none;
+}
+
+.form-button {
+    width: auto;
+    min-width: 70px;
+}
+
+.settings-list {
+    list-style: none;
+    margin-bottom: 15px;
+    padding: 0;
+}
+
+.clickable {
+    cursor: pointer;
+    user-select: none;
 }
 
 ::-webkit-scrollbar {
