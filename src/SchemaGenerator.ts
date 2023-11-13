@@ -1,17 +1,11 @@
 import { generateSchemaForBoolean } from "./generators/generateSchemaForBoolean";
 import { generateSchemaForNumber } from "./generators/generateSchemaForNumber";
 import { generateSchemaForString } from "./generators/generateSchemaForString";
+import {
+    defaultSchemaGenerationSettings,
+    SchemaGenerationSettings,
+} from "./settings/settings";
 import { wrapKeyWithQuotesIfNeeded } from "./wrapKeyWithQuotesIfNeeded";
-
-export interface SchemaGenerationSettings {
-    makeFieldsRequired: boolean;
-    useTrailingCommas: boolean;
-}
-
-const defaultSchemaGenerationSettings: SchemaGenerationSettings = {
-    makeFieldsRequired: true,
-    useTrailingCommas: false,
-};
 
 export class SchemaGenerator {
     private readonly INDENT_SIZE = 4;
