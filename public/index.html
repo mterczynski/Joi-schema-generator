@@ -2,19 +2,24 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="description" content="Joi schema generator" />
         <link rel="stylesheet" type="text/css" href="./index.css" />
         <title>Joi schema generator</title>
-
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism-tomorrow.min.css" rel="stylesheet" />
+        <link
+            rel="icon"
+            type="image/x-icon"
+            href="http://www.mterczynski.pl/assets/favicons/favicon-1.png"
+        />
     </head>
     <body>
         <div class="flex">
-            <div class="flex-item" style="margin-right: 10px;">
-                <h2 class="column-header">Input: </h2>
-                <textarea id='input-textarea' class='input-textarea text-column' spellcheck="false"
+            <div class="flex-item" style="margin-right: 10px">
+                <h2 class="column-header">Input:</h2>
+                <textarea
+                    id="input-textarea"
+                    class="input-textarea text-column"
+                    spellcheck="false"
                     data-gramm="false"
                     data-gramm_editor="false"
                     data-enable-grammarly="false"
@@ -59,46 +64,73 @@
       ]
     }
   ]
-}</textarea>
+}</textarea
+                >
             </div>
 
             <div class="flex-item">
                 <h2 class="column-header">Output:</h2>
-                <pre class='language-javascript text-column'>
+                <pre class="language-javascript text-column">
 <code id="output"></code>
                 </pre>
                 <!-- reasons for hiding: https://github.com/mterczynski/Joi-schema-generator/issues/1 -->
-                <button class="button copy-button" id="copy-to-clipboard-button" style="display: none;">Copy to clipboard</button>
-                <button class="button settings-button" id="settings-button">Settings</button>
+                <button
+                    class="button copy-button"
+                    id="copy-to-clipboard-button"
+                    style="display: none"
+                >
+                    Copy to clipboard
+                </button>
+                <button class="button settings-button" id="settings-button">
+                    Settings
+                </button>
             </div>
-
         </div>
 
         <div id="settings-modal-overlay" class="modal-overlay modal-hidden">
             <div class="modal">
-                <h3>
-                    Settings
-                </h3>
+                <h3>Settings</h3>
                 <form>
                     <ul class="settings-list">
                         <li>
-                            <input id="setting-make-properties-required" type="checkbox" checked>
-                            <label for="setting-make-properties-required" class="clickable">
+                            <input
+                                id="setting-make-properties-required"
+                                type="checkbox"
+                                checked
+                            />
+                            <label
+                                for="setting-make-properties-required"
+                                class="clickable"
+                            >
                                 Make properties required
                             </label>
 
-                            <br/>
+                            <br />
 
-                            <input id="setting-use-trailing-commas" type="checkbox">
-                            <label for="setting-use-trailing-commas" class="clickable">
+                            <input
+                                id="setting-use-trailing-commas"
+                                type="checkbox"
+                            />
+                            <label
+                                for="setting-use-trailing-commas"
+                                class="clickable"
+                            >
                                 Use trailing commas
                             </label>
                         </li>
                     </ul>
-                    <button id="settings-save-button" type="button" class="button form-button button-info">
+                    <button
+                        id="settings-save-button"
+                        type="button"
+                        class="button form-button button-info"
+                    >
                         Save
                     </button>
-                    <button id="settings-cancel-button" type="button" class="button form-button button-cancel">
+                    <button
+                        id="settings-cancel-button"
+                        type="button"
+                        class="button form-button button-cancel"
+                    >
                         Cancel
                     </button>
                 </form>
