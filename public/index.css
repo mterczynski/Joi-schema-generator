@@ -131,6 +131,10 @@ body {
     user-select: none;
 }
 
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
 ::-webkit-scrollbar {
     width: 10px;
 }
