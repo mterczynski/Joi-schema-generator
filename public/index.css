@@ -131,7 +131,7 @@ body {
     user-select: none;
 }
 
-input[type="checkbox"] {
+.checkbox-input {
     cursor: pointer;
 }
 
