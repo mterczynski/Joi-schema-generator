@@ -55,6 +55,8 @@ joi-schema-generator --input data.json --trailing-commas
 
 ## Example
 
+Input:
+
 ```json
 {
     "squadName": "Super hero squad",
@@ -75,30 +77,6 @@ joi-schema-generator --input data.json --trailing-commas
         }
     ]
 }
-```
-
-## Example
-
-Input:
-
-```javascript
-Joi.object({
-    squadName: Joi.string().required(),
-    homeTown: Joi.string().required(),
-    formed: Joi.number().required(),
-    secretBase: Joi.string().required(),
-    active: Joi.boolean().required(),
-    members: Joi.array()
-        .items(
-            Joi.object({
-                name: Joi.string().required(),
-                age: Joi.number().required(),
-                secretIdentity: Joi.string().required(),
-                powers: Joi.array().items(Joi.string()).required(),
-            })
-        )
-        .required(),
-}).required();
 ```
 
 Output:

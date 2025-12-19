@@ -59,7 +59,9 @@ try {
     parsedInput = JSON.parse(inputData);
 } catch {
     try {
-        // Try eval as fallback for JS objects
+        // Try eval as fallback for JS objects (e.g., {key: "value"} without quotes)
+        // Note: This is safe for a local CLI tool where the user controls the input
+        // and matches the behavior of the web version
         parsedInput = eval("(" + inputData + ")");
     } catch (error) {
         console.error(`Error parsing input: ${error.message}`);
