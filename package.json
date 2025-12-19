@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "joi-schema-generator": "./dist/cli.js"
+  },
   "scripts": {
     "test": "jest",
     "start": "snowpack dev --port 8081",
-    "build": "snowpack build"
+    "build": "snowpack build",
+    "build:cli": "tsc --project tsconfig.cli.json"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +19,7 @@
     "@snowpack/plugin-typescript": "^1.2.1",
     "@types/jest": "^26.0.23",
     "@types/prismjs": "^1.16.5",
+    "commander": "^12.1.0",
     "email-validator": "^2.0.4",
     "is-ip": "^3.1.0",
     "is-uuid": "^1.0.2",
@@ -25,6 +30,7 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
+    "@types/node": "^14.18.63",
     "snowpack": "^3.3.7"
   }
 }
