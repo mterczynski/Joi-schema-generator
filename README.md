@@ -1,11 +1,61 @@
 # Joi schema generator
 
 Tool for generating schemas based on JS/JSON objects/arrays.  
-The application is available on http://mterczynski.pl/joi-schema-generator
+Available as a web application on http://mterczynski.pl/joi-schema-generator and as a CLI tool.
 
 <img src="preview.png">
 
-Example input:
+## CLI Usage
+
+### Installation
+
+To use the CLI tool globally:
+
+```bash
+npm install -g joi-schema-generation
+```
+
+Or use it locally in your project:
+
+```bash
+npm install joi-schema-generation
+```
+
+### Running the CLI
+
+**From stdin:**
+
+```bash
+echo '{"name": "John", "age": 30}' | joi-schema-generator
+```
+
+**From a file:**
+
+```bash
+joi-schema-generator --input data.json
+```
+
+**With options:**
+
+```bash
+# Generate schema without required fields
+joi-schema-generator --input data.json --no-required
+
+# Generate schema with trailing commas
+joi-schema-generator --input data.json --trailing-commas
+```
+
+**Available options:**
+- `-i, --input <file>` - Input file containing JSON/JS object
+- `-r, --required` - Make all fields required (default: true)
+- `--no-required` - Do not make fields required
+- `-t, --trailing-commas` - Use trailing commas in generated schema
+- `-V, --version` - Output version number
+- `-h, --help` - Display help
+
+## Example
+
+Input:
 
 ```json
 {
@@ -29,7 +79,7 @@ Example input:
 }
 ```
 
-Example output:
+Output:
 
 ```javascript
 Joi.object({
@@ -72,3 +122,7 @@ Runs the application in development mode (it uses watch mode with hot reloading)
 ### npm run build
 
 Compiles the application into a deployable build folder
+
+### npm run build:cli
+
+Compiles the CLI tool into the dist folder
