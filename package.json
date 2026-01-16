@@ -5,14 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "snowpack dev --port 8081",
-    "build": "snowpack build"
+    "start": "vite --port 8081",
+    "build": "vite build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@snowpack/plugin-typescript": "^1.2.1",
     "@types/jest": "^26.0.23",
     "@types/prismjs": "^1.16.5",
     "email-validator": "^2.0.4",
@@ -25,6 +24,6 @@
     "typescript": "^4.2.4"
   },
   "devDependencies": {
-    "snowpack": "^3.3.7"
+    "vite": "^5.0.0"
   }
 }
